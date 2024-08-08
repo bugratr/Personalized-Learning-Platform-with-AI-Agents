@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], textarea, input[type="submit"] {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        textarea {
+            height: 100px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Learning Platform</h1>
+        <form action="/get_material" method="POST">
+            <input type="text" name="topic" placeholder="Enter topic" required>
+            <input type="submit" value="Get Material">
+        </form>
+        {% if material %}
+            <div class="result">
+                <h2>Educational Material:</h2>
+                <p>{{ material }}</p>
+            </div>
+        {% endif %}
+        <form action="/ask_question" method="POST">
+            <textarea name="question" placeholder="Enter your question" required></textarea>
+            <input type="submit" value="Ask Question">
+        </form>
+        {% if answer %}
+            <div class="result">
+                <h2>Answer:</h2>
+                <p>{{ answer }}</p>
+            </div>
+        {% endif %}
+        <form action="/track_progress" method="POST">
+            <input type="text" name="student_name" placeholder="Enter student name" required>
+            <textarea name="activities" placeholder="Enter activities (comma-separated)" required></textarea>
+            <input type="submit" value="Track Progress">
+        </form>
+        {% if progress %}
+            <div class="result">
+                <h2>Progress:</h2>
+                <p>{{ progress }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], textarea, input[type="submit"] {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        textarea {
+            height: 100px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Exam System</h1>
+        <form action="/generate_questions" method="POST">
+            <input type="text" name="subject" placeholder="Enter subject" required>
+            <input type="text" name="difficulty" placeholder="Enter difficulty (easy, medium, hard)" required>
+            <input type="submit" value="Generate Questions">
+        </form>
+        {% if questions %}
+            <div class="result">
+                <h2>Generated Questions:</h2>
+                <p>{{ questions }}</p>
+            </div>
+        {% endif %}
+        <form action="/evaluate_exam" method="POST">
+            <textarea name="answers" placeholder="Enter student answers" required></textarea>
+            <textarea name="correct_answers" placeholder="Enter correct answers" required></textarea>
+            <input type="submit" value="Evaluate Exam">
+        </form>
+        {% if evaluation %}
+            <div class="result">
+                <h2>Evaluation:</h2>
+                <p>{{ evaluation }}</p>
+            </div>
+        {% endif %}
+        {% if feedback %}
+            <div class="result">
+                <h2>Feedback:</h2>
+                <p>{{ feedback }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
